@@ -1,0 +1,3 @@
+calculator:
+  additionServiceUrl: http://10.150.17.73:8070/api/addition/calculate
+  subtractionServiceUrl: http://10.150.17.73:8071/api/subtraction/calculate
