@@ -1,3 +1,9 @@
 calculator:
-  additionServiceUrl: http://10.150.17.73:8070/api/addition/calculate
-  subtractionServiceUrl: http://10.150.17.73:8071/api/subtraction/calculate
+  additionServiceUrl: http://localhost:8070/api/addition/calculate
+  subtractionServiceUrl: http://localhost:8071/api/subtraction/calculate
+
+server:
+  port: 8080
+spring:
+  application:
+    name: calculator-service

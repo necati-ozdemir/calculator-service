@@ -10,14 +10,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 public interface ICalculatorRestController {
     @PostMapping(
-            value = "addition/",
+            path = "/addition",
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
     CalculationResult addTwoNumbers(@RequestBody Calculation calculation);
 
     @PostMapping(
-            value = "subtraction/",
+            path = "/subtraction",
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
     )

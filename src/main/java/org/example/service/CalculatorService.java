@@ -5,6 +5,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.example.config.CalculatorProperties;
 import org.example.domain.Calculation;
 import org.example.domain.CalculationResult;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -16,6 +18,7 @@ import java.util.Optional;
 
 @Service
 public class CalculatorService implements ICalculatorService {
+    private static final Logger logger = LoggerFactory.getLogger(CalculatorService.class);
 
     private final RestTemplate restTemplate;
     private final CalculatorProperties calculatorProperties;
@@ -47,14 +50,23 @@ public class CalculatorService implements ICalculatorService {
     private CalculationResult doRequestForResult(String url, Calculation calculation) {
         return Optional.of(calculation)
                 .map(this::prepareQuery)
-                .map(query -> this.restTemplate.getForEntity(
-                        url + "?" + query,
-                        String.class
-                ))
+                .map(query -> this.doRequest(url, query))
                 .filter(responseEntity -> responseEntity.getStatusCodeValue() == 200)
                 .map(ResponseEntity::getBody)
                 .map(this::toCalculationResultObject)
-                .orElseThrow();
+                .orElseGet(() -> new CalculationResult("FAIL", 0));
+    }
+
+    private ResponseEntity<String> doRequest(String url, String query) {
+        try {
+            return this.restTemplate.getForEntity(
+                    url + "?" + query,
+                    String.class
+            );
+        } catch (Exception e) {
+            logger.error("Error in get request for Url: " + url + " Message: " + e.getMessage());
+            return null;
+        }
     }
 
     private String prepareQuery(Calculation calculation) {
@@ -65,8 +77,8 @@ public class CalculatorService implements ICalculatorService {
         try {
             return this.objectMapper.readValue(body, CalculationResult.class);
         } catch (JsonProcessingException e) {
-            e.printStackTrace();
-            return new CalculationResult();
+            logger.error("Error in reading value with object mapper. Error Message: " + e.getMessage());
+            return new CalculationResult("FAIL", 0);
         }
     }
 
