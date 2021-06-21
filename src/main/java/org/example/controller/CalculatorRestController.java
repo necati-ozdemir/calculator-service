@@ -46,4 +46,14 @@ public class CalculatorRestController implements ICalculatorRestController {
     public CalculationResult divTwoNumbers(Calculation calculation) {
         return this.calculatorService.divTwoNumbers(calculation);
     }
+
+    @PostMapping(
+            path = "/multiplication",
+            consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    @Override
+    public CalculationResult multipleTwoNumbers(Calculation calculation) {
+        return this.calculatorService.multipleTwoNumbers(calculation);
+    }
 }

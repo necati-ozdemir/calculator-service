@@ -9,4 +9,6 @@ public interface ICalculatorService {
     CalculationResult subTwoNumbers(Calculation calculation);
 
     CalculationResult divTwoNumbers(Calculation calculation);
+
+    CalculationResult multipleTwoNumbers(Calculation calculation);
 }

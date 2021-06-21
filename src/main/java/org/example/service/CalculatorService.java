@@ -57,6 +57,14 @@ public class CalculatorService implements ICalculatorService {
         );
     }
 
+    @Override
+    public CalculationResult multipleTwoNumbers(Calculation calculation) {
+        return this.doRequestForResult(
+                this.calculatorProperties.getMultiplicationServiceUrl(),
+                calculation
+        );
+    }
+
     private CalculationResult doRequestForResult(String url, Calculation calculation) {
         return Optional.of(calculation)
                 .map(this::prepareQuery)

@@ -2,6 +2,7 @@ calculator:
   additionServiceUrl: http://localhost:8070/api/addition/calculate
   subtractionServiceUrl: http://localhost:8071/api/subtraction/calculate
   divisionServiceUrl: http://localhost:8074/api/division/calculate
+  multiplicationServiceUrl: http://localhost:8075/api/multiplication/calculate
 
 server:
   port: 8072

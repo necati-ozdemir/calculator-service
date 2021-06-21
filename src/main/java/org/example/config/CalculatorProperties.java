@@ -9,10 +9,12 @@ public class CalculatorProperties {
     private static final String ADDITION_SERVICE_DEFAULT_URL = "http://localhost:8081";
     private static final String SUBTRACTION_SERVICE_DEFAULT_URL = "http://localhost:8082";
     private static final String DIVISION_SERVICE_DEFAULT_URL = "http://localhost:8083";
+    private static final String MULTIPLICATION_SERVICE_DEFAULT_URL = "http://localhost:8084";
 
     private String additionServiceUrl = ADDITION_SERVICE_DEFAULT_URL;
     private String subtractionServiceUrl = SUBTRACTION_SERVICE_DEFAULT_URL;
     private String divisionServiceUrl = DIVISION_SERVICE_DEFAULT_URL;
+    private String multiplicationServiceUrl = MULTIPLICATION_SERVICE_DEFAULT_URL;
 
     public CalculatorProperties() {
     }
@@ -39,5 +41,13 @@ public class CalculatorProperties {
 
     public void setDivisionServiceUrl(String divisionServiceUrl) {
         this.divisionServiceUrl = divisionServiceUrl;
+    }
+
+    public String getMultiplicationServiceUrl() {
+        return multiplicationServiceUrl;
+    }
+
+    public void setMultiplicationServiceUrl(String multiplicationServiceUrl) {
+        this.multiplicationServiceUrl = multiplicationServiceUrl;
     }
 }

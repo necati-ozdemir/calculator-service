@@ -13,7 +13,7 @@
 
     <groupId>org.example</groupId>
     <artifactId>calculator-service</artifactId>
-    <version>1.1-SNAPSHOT</version>
+    <version>1.2-SNAPSHOT</version>
 
     <properties>
         <jib-plugin.version>2.1.0</jib-plugin.version>

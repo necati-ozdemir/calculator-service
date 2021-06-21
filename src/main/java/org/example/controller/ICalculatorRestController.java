@@ -29,4 +29,11 @@ public interface ICalculatorRestController {
             produces = MediaType.APPLICATION_JSON_VALUE
     )
     CalculationResult divTwoNumbers(@RequestBody Calculation calculation);
+
+    @PostMapping(
+            path = "/multiplication",
+            consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    CalculationResult multipleTwoNumbers(@RequestBody Calculation calculation);
 }
