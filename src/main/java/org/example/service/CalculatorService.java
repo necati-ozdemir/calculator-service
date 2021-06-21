@@ -11,6 +11,7 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -27,6 +28,7 @@ public class CalculatorService implements ICalculatorService {
 
     public CalculatorService(CalculatorProperties calculatorProperties) {
         this.restTemplate = new RestTemplate();
+        this.restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
 
         this.calculatorProperties = calculatorProperties;
     }
@@ -43,6 +45,14 @@ public class CalculatorService implements ICalculatorService {
     public CalculationResult subTwoNumbers(Calculation calculation) {
         return this.doRequestForResult(
                 this.calculatorProperties.getSubtractionServiceUrl(),
+                calculation
+        );
+    }
+
+    @Override
+    public CalculationResult divTwoNumbers(Calculation calculation) {
+        return this.doRequestForResult(
+                this.calculatorProperties.getDivisionServiceUrl(),
                 calculation
         );
     }

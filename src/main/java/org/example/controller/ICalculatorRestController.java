@@ -22,4 +22,11 @@ public interface ICalculatorRestController {
             produces = MediaType.APPLICATION_JSON_VALUE
     )
     CalculationResult subTwoNumbers(@RequestBody Calculation calculation);
+
+    @PostMapping(
+            path = "/division",
+            consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    CalculationResult divTwoNumbers(@RequestBody Calculation calculation);
 }

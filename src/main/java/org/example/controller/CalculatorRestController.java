@@ -36,4 +36,14 @@ public class CalculatorRestController implements ICalculatorRestController {
     public CalculationResult subTwoNumbers(@RequestBody Calculation calculation) {
         return this.calculatorService.subTwoNumbers(calculation);
     }
+
+    @PostMapping(
+            path = "/division",
+            consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    @Override
+    public CalculationResult divTwoNumbers(Calculation calculation) {
+        return this.calculatorService.divTwoNumbers(calculation);
+    }
 }

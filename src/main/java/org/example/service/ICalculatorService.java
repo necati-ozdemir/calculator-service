@@ -7,4 +7,6 @@ public interface ICalculatorService {
     CalculationResult addTwoNumbers(Calculation calculation);
 
     CalculationResult subTwoNumbers(Calculation calculation);
+
+    CalculationResult divTwoNumbers(Calculation calculation);
 }
