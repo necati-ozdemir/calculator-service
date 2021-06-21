@@ -2,6 +2,7 @@ package org.example.controller;
 
 import org.example.domain.Calculation;
 import org.example.domain.CalculationResult;
+import org.example.domain.CalculationString;
 import org.example.service.ICalculatorService;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -53,7 +54,7 @@ public class CalculatorRestController implements ICalculatorRestController {
             produces = MediaType.APPLICATION_JSON_VALUE
     )
     @Override
-    public CalculationResult multipleTwoNumbers(Calculation calculation) {
+    public CalculationResult multipleTwoNumbers(CalculationString calculation) {
         return this.calculatorService.multipleTwoNumbers(calculation);
     }
 }

@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.example.config.CalculatorProperties;
 import org.example.domain.Calculation;
 import org.example.domain.CalculationResult;
+import org.example.domain.CalculationString;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpEntity;
@@ -58,17 +59,30 @@ public class CalculatorService implements ICalculatorService {
     }
 
     @Override
-    public CalculationResult multipleTwoNumbers(Calculation calculation) {
+    public CalculationResult multipleTwoNumbers(CalculationString calculation) {
         return this.doRequestForResult(
                 this.calculatorProperties.getMultiplicationServiceUrl(),
                 calculation
         );
     }
 
+    private CalculationResult doRequestForResult(String url, CalculationString calculation) {
+        return Optional.of(calculation)
+                .map(this::prepareQuery)
+                .map(query -> this.doRequestForResult(url, query))
+                .get();
+    }
+
     private CalculationResult doRequestForResult(String url, Calculation calculation) {
         return Optional.of(calculation)
                 .map(this::prepareQuery)
-                .map(query -> this.doRequest(url, query))
+                .map(query -> this.doRequestForResult(url, query))
+                .get();
+    }
+
+    private CalculationResult doRequestForResult(String url, String query) {
+        return Optional.of(query)
+                .map(q -> this.doRequest(url, q))
                 .filter(responseEntity -> responseEntity.getStatusCodeValue() == 200)
                 .map(ResponseEntity::getBody)
                 .map(this::toCalculationResultObject)
@@ -88,7 +102,21 @@ public class CalculatorService implements ICalculatorService {
     }
 
     private String prepareQuery(Calculation calculation) {
-        return "one=" + calculation.getNumberOne() + "&two=" + calculation.getNumberTwo();
+        return this.prepareQuery(
+                calculation.getNumberOne().toString(),
+                calculation.getNumberTwo().toString()
+        );
+    }
+
+    private String prepareQuery(CalculationString calculation) {
+        return this.prepareQuery(
+                calculation.getNumberOne(),
+                calculation.getNumberTwo()
+        );
+    }
+
+    private String prepareQuery(String numberOne, String numberTwo) {
+        return "one=" + numberOne + "&two=" + numberTwo;
     }
 
     private CalculationResult toCalculationResultObject(String body) {

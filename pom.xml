@@ -19,7 +19,6 @@
         <jib-plugin.version>2.1.0</jib-plugin.version>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
-        <testcontainers.version>1.15.0-rc2</testcontainers.version>
         <encoding>UTF-8</encoding>
     </properties>
 
@@ -80,11 +79,6 @@
             <scope>test</scope>
         </dependency>
 
-        <dependency>
-            <groupId>org.testcontainers</groupId>
-            <artifactId>testcontainers</artifactId>
-            <version>${testcontainers.version}</version>
-        </dependency>
 <!--        <dependency>-->
 <!--            <groupId>org.testcontainers</groupId>-->
 <!--            <artifactId>junit-jupiter</artifactId>-->
@@ -125,7 +119,7 @@
                         <image>openjdk:8u232-jre-slim</image>
                     </from>
                     <to>
-                        <image>registry.hub.docker.com/${project.name}</image>
+                        <image>registry.hub.docker.com/${project.artifactId}</image>
                         <tags>
                             <tag>${project.version}</tag>
                             <tag>latest</tag>
